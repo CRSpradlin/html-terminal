@@ -1,3 +1,5 @@
+let command_list = ["help"];
+
 function runApp_404(){
     Typer.write("FAILURE: ", "red");
     Typer.write("Web server could not find specified file or directory with error message: ");
@@ -43,4 +45,11 @@ function runApp_404(){
     Typer.newLine();
     Typer.write("               44              0000000000                        44");
     Typer.newLine();
+}
+function runApp_help(){
+    Typer.write("Possible commands include:");
+    for(i=0; i<command_list.length; i++){
+        Typer.newLine();
+        Typer.write(command_list[i], 'blue');
+    }
 }

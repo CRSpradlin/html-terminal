@@ -12,6 +12,9 @@ function runApp(appString){
     else if(appName=="  404"){
         runApp_404();
     }
+    else if(appName="help"){
+        runApp_help();
+    }
     else{
         Typer.newLine();
         Typer.write("FAILURE: ", "red");
