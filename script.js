@@ -1,3 +1,5 @@
+let server_name = "server@crspradlin.org";
+
 
 let Typer={
     speed: 5,
@@ -54,7 +56,7 @@ let Typer={
     },
     awaitInput: function(){
         this.newLine();
-        this.write("server@crspradlin.org", "green");
+        this.write(server_name, "green");
         this.write(":~");
         this.write("$", "blue");
         this.add("<span class='input'></span>");
@@ -99,5 +101,5 @@ function gatherInput(e){
 }
 function onload(){
     Typer.init();
-    runApp("  404");
+    runApp("");
 }

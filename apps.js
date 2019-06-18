@@ -1,5 +1,12 @@
-let command_list = ["help"];
+let command_list = ["help", "clear", "history"]; //Indexed commands
+//command_history defined within app_execute.js
 
+//Non Indexed Commands (Indexed Commands Below)
+function runApp_errorMsg(str){
+    Typer.newLine();
+    Typer.write("FAILURE: ", "red");
+    Typer.write(str);
+}
 function runApp_404(){
     Typer.write("FAILURE: ", "red");
     Typer.write("Web server could not find specified file or directory with error message: ");
@@ -46,10 +53,26 @@ function runApp_404(){
     Typer.write("               44              0000000000                        44");
     Typer.newLine();
 }
+
+//Indexed Commands:
 function runApp_help(){
+    Typer.newLine();
     Typer.write("Possible commands include:");
-    for(i=0; i<command_list.length; i++){
+    let length = command_list.length;
+    for(let i=0; i<length; i++){
         Typer.newLine();
         Typer.write(command_list[i], 'blue');
+    }
+}
+function runApp_clear(){
+    $("#console").html("");
+}
+function runApp_history(){
+    Typer.newLine();
+    Typer.write("Most recent commands:")
+    let length = command_history.length;
+    for(let i=0; i<length; i++){
+        Typer.newLine();
+        Typer.write((i+1)+". "+command_history[i], 'white');
     }
 }
