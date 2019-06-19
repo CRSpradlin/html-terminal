@@ -53,6 +53,27 @@ function runApp_404(){
     Typer.write("               44              0000000000                        44");
     Typer.newLine();
 }
+function runApp_arrows(direction){
+    numCommands = command_history.length;
+    if(command_pos==-1){
+        command_pos = numCommands;
+    } 
+
+    if(direction == "up"){
+        if(command_pos > 0){
+            command_pos = command_pos - 1;
+        }
+    } else {
+        if(command_pos < numCommands){
+            command_pos = command_pos + 1;
+        }
+    }
+    if(command_pos==numCommands){
+        $("#console").find("span.input").last().html(command_curr);
+    } else {
+        $("#console").find("span.input").last().html(command_history[command_pos]);
+    }
+}
 
 //Indexed Commands:
 function runApp_help(){

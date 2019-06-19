@@ -74,6 +74,7 @@ function gatherInput(e){
     if(Typer.inputBoolean){
         if(e.key == "Enter"){
             Typer['inputBoolean'] = false;
+            command_curr = "";
             let cont = Typer.content();
             if(cont.substring(cont.length-1, cont.length)=="|")
                 $("#console").html($("#console").html().substring(0, cont.length-1));
@@ -82,10 +83,16 @@ function gatherInput(e){
         else if(e.key == "Backspace"){
             let cont = $("#console").find("span.input").last().html();
             $("#console").find("span.input").last().html($("#console").find("span.input").last().html().substring(0, cont.length-1));
+            command_curr = $("#console").find("span.input").last().html();
+            command_pos = command_history.length;
         }
-        else if((e.key+"").length>1){
-
+        else if(e.key == "ArrowUp"){
+            runApp_arrows("up");
         }
+        else if(e.key == "ArrowDown"){
+            runApp_arrows("down");
+        }
+        else if((e.key+"").length>1){}
         else if(e.key == " "){
             let cont = $("#console").find("span.input").last().html();
             if(e.key == " "){
@@ -96,6 +103,8 @@ function gatherInput(e){
         } 
         else {
             $("#console").find("span.input").last().html($("#console").find("span.input").last().html() + e.key);
+            command_curr = $("#console").find("span.input").last().html();
+            command_pos = command_history.length;
         }
     }
 }

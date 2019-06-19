@@ -1,4 +1,7 @@
 let command_history = [];
+let command_pos = 0;
+let command_curr = "";
+
 function runApp(appString){
     if(appString.includes("<") || appString.includes(">")){
         runApp_errorMsg("Invalid characters present in command string.");
@@ -11,6 +14,7 @@ function runApp(appString){
         appStringArray = appString.split(" ");
         appName = appStringArray[0];
         command_history.push(appString);
+        command_pos = command_history.length;
     }
     if(appName==""){
         command_history.pop(); 
