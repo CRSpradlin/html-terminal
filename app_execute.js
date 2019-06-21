@@ -1,6 +1,9 @@
 let command_history = [];
 let command_pos = 0;
 let command_curr = "";
+let appString = "";
+let appStringArray = [];
+let appName = "";
 
 function runApp(appString){
     if(appString.includes("<") || appString.includes(">")){
@@ -42,6 +45,10 @@ function runApp(appString){
         } else {
             runApp_history();
         }
+    }
+    else if(appName=="echo"){
+        console.log(appStringArray);
+        runApp_echo(appStringArray);
     }
     else{
         runApp_errorMsg("Could not find command, '"+ appName +"' try typing help for a list of commands.");
