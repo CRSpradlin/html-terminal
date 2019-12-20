@@ -88,9 +88,11 @@ function gatherInput(e){
         }
         else if(e.key == "ArrowUp"){
             runApp_arrows("up");
+	    e.preventDefault();
         }
         else if(e.key == "ArrowDown"){
             runApp_arrows("down");
+ 	    e.preventDefault();
         }
         else if((e.key+"").length>1){}
         else if(e.key == " "){
