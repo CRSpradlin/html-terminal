@@ -1,4 +1,4 @@
-let command_list = ["help", "clear", "history", "echo"]; //Indexed commands
+let command_list = ["help", "clear", "history", "echo", "server"]; //Indexed commands
 //command_history defined within app_execute.js
 
 //Non Indexed Commands (Indexed Commands Below)
@@ -102,4 +102,96 @@ function runApp_echo(stringArray){
     console.log(stringArray.join(" "));
     let str = stringArray.join(" ").substring(5,stringArray.join(" ").length);
     Typer.write(str);
+}
+let serverOn = false;
+function runApp_server(stringArray){
+    let serverOptions = ["restart", "start", "status", "stop", "help"];
+    if(serverOptions.includes(stringArray[1])){
+        if(stringArray[1]=="restart" || stringArray[1]=="start"){
+            if(stringArray.length>3){
+                runApp_errorMsg("Unknown sub-parameters " + stringArray.join(", ").substring((15+(stringArray[1].length-5)), stringArray.join(", ").length) + " for 'server "+stringArray[1]+"'.");
+            } else {
+                if(!stringArray[2]){
+                    if(!serverOn){
+                        window.location = "https://www.crspradlin.org";
+                    } else {
+                        Typer.newLine();
+                        Typer.write("Server is already running.")
+                    }
+                }
+                else if(stringArray[2]=="-b"){
+                    if(!serverOn){
+                        Typer.newLine();
+                        Typer.write("Starting Server");
+                        Typer.lag(1000);
+                        Typer.write(".");
+                        Typer.lag(1000);
+                        Typer.write(".");
+                        Typer.lag(1000);
+                        Typer.write(".");
+                        Typer.lag(1000);
+                        Typer.write("OK!", "green");
+                        serverOn = true;
+                    } else {
+                        Typer.newLine();
+                        Typer.write("Server is already running.")
+                    }                    
+                } else {
+                    runApp_errorMsg("Unknown sub-parameters " + stringArray.join(", ").substring((15+(stringArray[1].length-5)), stringArray.join(", ").length) + " for 'server "+stringArray[1]+"'.");
+                }
+            }
+        }
+        else if(stringArray[1]=="status"){
+            if(stringArray.length>2){
+                runApp_errorMsg("Unknown sub-parameters " + stringArray.join(", ").substring(16, stringArray.join(", ").length) + " for 'server status'.");
+            } else {
+                Typer.newLine();
+                Typer.write("Server status: ")
+                if(serverOn){
+                    Typer.write("Running", "green");
+                } else {
+                    Typer.write("Stopped", "red");
+                }
+            }
+        }
+        else if(stringArray[1]=="stop"){
+            if(stringArray.length>2){
+                runApp_errorMsg("Unknown sub-parameters " + stringArray.join(", ").substring(14, stringArray.join(", ").length) + " for 'server stop'.");
+            } else {
+                if(serverOn){
+                    Typer.newLine();
+                    Typer.write("Stopping Server");
+                    Typer.lag(1000);
+                    Typer.write(".");
+                    Typer.lag(1000);
+                    Typer.write(".");
+                    Typer.lag(1000);
+                    Typer.write(".");
+                    Typer.lag(1000);
+                    Typer.write("OK!", "green");
+                    serverOn = false;
+                } else {
+                    Typer.newLine();
+                    Typer.write("Server is already not running.")
+                }
+            }
+        } else {
+            Typer.newLine();
+            Typer.write("Server:", "blue");
+            Typer.newLine();
+            Typer.write("   status | view server status");
+            Typer.newLine();
+            Typer.write("   start [-b background mode] | start server");
+            Typer.newLine();
+            Typer.write("   restart [-b background mode] | restart server");
+            Typer.newLine();
+            Typer.write("   stop | stop server");
+        }
+    } else {
+        if(!stringArray[1]){
+            runApp_errorMsg("No optional parameters found for server. Try running 'server help'.");
+        } else {
+            runApp_errorMsg("Could not find option '"+stringArray[1]+"' for command 'server'. Try running 'server help'.");
+        }
+    }
 }
